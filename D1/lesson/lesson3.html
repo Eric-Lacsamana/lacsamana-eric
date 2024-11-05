@@ -1,0 +1,39 @@
+<html></html>
+    <head>
+        <title>HTML Forms</title>
+    </head>
+    <body>
+        <h1>Contact Form</h1>
+        <form action="" method="post">
+            <label for="fname">First Name:</label>
+            <input type="text" name="fname" required /> <br/>
+            <label for="email">Email:</label>
+            <input type="email" name="email" required /> <br/>
+            <label for="priority">Priority:</label>
+            <select id="priority" name="priority">
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+
+            <label>Gender:</label>
+            <input type="radio" id="male" name="gender" value="male">
+            <label for="male">Male</label>
+            <input type="radio" id="female" name="gender" value="female">
+            <label for="female">Female</label>
+            <br>
+            <label for="female">Subscribe to News Letter</label>
+            <input type="checkbox" id="newsletter" name="newsletter">
+            
+            <br>
+            Select Color:
+            <input type="color" />
+            <br>
+            Select Number:
+            <input type="number" min="0" max="100" />
+            <hr>
+        
+            <button type="submit">Submit</button>
+        </form>
+    </body>
+</html>
