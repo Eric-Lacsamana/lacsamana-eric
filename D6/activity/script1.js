@@ -68,7 +68,8 @@ function getSummary(book) {
 console.log(getSummary(books[0]));
 
 // Step 10: Create an array called 'library' and add the 'book' object to it.
-const library = [book[0]]
+const library = []
+library.push(books[0]);
 
 // Step 11: Log the 'library' array to the console to verify the book is stored in the array.
 console.log(library);
@@ -96,7 +97,8 @@ function startEngine(car) {
 startEngine(car);
 
 // Step 17: Create an array called 'garage' and add the 'car' object to it.
-const garage = [car];
+const garage = [];
+garage.push(car);
 
 // Step 18: Log the 'garage' array to the console to verify the car is stored in the array.
 console.log(garage);
