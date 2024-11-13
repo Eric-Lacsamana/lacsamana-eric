@@ -45,9 +45,9 @@ const renderCart = function() {
     for (let i = 0; i < cart.length; i++) {
 
             const cartItem = document.createElement('li');
-            cartItem.textContent = `${cart[i].name} Price: $${cart[i].price} Qty: ${cart[i].quantity}`;
-        
-        
+            cartItem.textContent = `${cart[i].name} Price: $${cart[i].price}`;
+       
+            
             const addToCartButton = document.createElement('button');
             addToCartButton.addEventListener('click', () => {
                 cartItem.remove();
@@ -66,8 +66,13 @@ const renderCart = function() {
                 renderTotal();
             });
             addToCartButton.textContent = 'Remove';
+
+            const qtyText = document.createElement('span');
+            qtyText.textContent = `${cart[i].quantity}`
+
+
             cartItem.appendChild(addToCartButton);
-        
+            cartItem.appendChild(qtyText);
             cartList.appendChild(cartItem);
         }
 }
@@ -79,7 +84,7 @@ const renderProducts = function() {
         if (products[i].quantity >= 1) {
             const product = document.createElement('li');
     
-            product.textContent = `${products[i].name} Price: $${products[i].price} Q: ${products[i].quantity}`;
+            product.textContent = `${products[i].name} Price: $${products[i].price}`;
         
             const addToCartButton = document.createElement('button');
         
@@ -118,7 +123,7 @@ const renderTotal = () => {
     for (let i = 0; i < cart.length; i++) {
         total += cart[i].price * cart[i].quantity; 
     }
-    totalText.innerHTML = `Total: $${total.toFixed(2)}`;
+    totalText.textContent = `Total: $${total.toFixed(2)}`;
 };
 
 renderTotal();
