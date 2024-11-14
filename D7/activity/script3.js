@@ -55,18 +55,17 @@ const renderCart = function() {
             addToCartButton.addEventListener('click', function() {
                 cartItem.remove();
                 
-                const productIndex = products.findIndex(function(product) { 
+                const index = products.findIndex(function(product) { 
+      
                     return product.productId === cart[i].productId 
                 });
-                        
-                if (productIndex > -1) {
-                    products[productIndex].quantity = 3;
-                } else {
-                    products.push({ ...cart[i], quantity: 3 })
+                   
+                if (index > -1) {
+                    products[index].quantity = 3;
                 }
-
                 cart.splice(i, 1);
 
+                renderCart();
                 renderProducts();
                 renderTotal();
             });
@@ -84,9 +83,10 @@ const renderCart = function() {
 
 const renderProducts = function() {
     productList.innerHTML = '';
-
+    console.log('PRODUCTS', cart);
     for (let i = 0; i < products.length; i++) {
         if (products[i].quantity >= 1) {
+    
             const product = document.createElement('li');
     
             product.textContent = `${products[i].name} Price: $${products[i].price}`;
@@ -132,4 +132,5 @@ const renderTotal = function() {
 };
 
 renderTotal();
+renderCart();
 renderProducts();
