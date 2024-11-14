@@ -24,33 +24,22 @@ const totalText = document.getElementById('total-text');
 
 const renderCart = function() {
     cartList.innerHTML = '';
-
     for (let i = 0; i < cart.length; i++) {
-
             const cartItem = document.createElement('li');
             cartItem.textContent = `${cart[i].name} Price: $${cart[i].price}`;
 
             const addToCartButton = document.createElement('button');
             addToCartButton.addEventListener('click', function() {
-                cartItem.remove();
-                
-                const index = products.findIndex(function(product) {
-                    return product.productId === cart[i].productId 
-                });
-                   
-                if (index > -1) {
-                    products[index].quantity = 3;
-                }
 
                 cart.splice(i, 1);
                 renderCart();
                 renderTotal();
             });
+
             addToCartButton.textContent = 'Remove';
 
             const qtyText = document.createElement('span');
             qtyText.textContent = `${cart[i].quantity}`
-
 
             cartItem.appendChild(addToCartButton);
             cartItem.appendChild(qtyText);
