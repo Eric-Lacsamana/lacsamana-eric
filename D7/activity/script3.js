@@ -55,14 +55,14 @@ const renderCart = function() {
             addToCartButton.addEventListener('click', function() {
                 cartItem.remove();
                 
-                const index = products.findIndex(function(product) { 
-      
+                const index = products.findIndex(function(product) {
                     return product.productId === cart[i].productId 
                 });
                    
                 if (index > -1) {
                     products[index].quantity = 3;
                 }
+
                 cart.splice(i, 1);
 
                 renderCart();
@@ -106,7 +106,7 @@ const renderProducts = function() {
                     } 
         
                     if (!existingCartItem) {
-                           cart.push({ ...products[i], quantity: 1 })
+                        cart.push({ ...products[i], quantity: 1 })
                     }
                 }
     
