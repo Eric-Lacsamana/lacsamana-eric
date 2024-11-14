@@ -63,13 +63,8 @@ const renderProducts = function() {
                     });
                
                     if (index > -1) {
-                        
-                       if (index !== -1) {
-                           cart[index].quantity += 1;
-                       }
-                    } 
-        
-                    if (index === -1) {
+                        cart[index].quantity += 1;
+                    } else {
                         cart.push({ ...products[i], quantity: 1 })
                     }
 
