@@ -5,19 +5,16 @@ const products = [
         productId: 1,
         name: 'Product 1',
         price: 10,
-        quantity: 3,
     },
     {
         productId: 2,
         name: 'Product 2',
         price: 15,
-        quantity: 3,
     },
     {
         productId: 3,
         name: 'Product 3',
         price: 20,
-        quantity: 3,
     }
 ]
 
@@ -85,8 +82,6 @@ const renderProducts = function() {
     productList.innerHTML = '';
 
     for (let i = 0; i < products.length; i++) {
-        if (products[i].quantity >= 1) {
-    
             const product = document.createElement('li');
     
             product.textContent = `${products[i].name} Price: $${products[i].price}`;
@@ -96,9 +91,7 @@ const renderProducts = function() {
             addToCartButton.textContent = 'Add to Cart';
             
             addToCartButton.addEventListener('click', function()  {
-             
-                if (products[i].quantity !== 0) {
-     
+      
                     const existingCartItem = getExistingCartItem(products[i].productId);
                     
                     if (existingCartItem) {
@@ -108,9 +101,6 @@ const renderProducts = function() {
                     if (!existingCartItem) {
                         cart.push({ ...products[i], quantity: 1 })
                     }
-                }
-    
-                products[i].quantity -= 1;
 
                 renderProducts();
                 renderCart();
@@ -120,7 +110,6 @@ const renderProducts = function() {
             product.appendChild(addToCartButton);
             productList.appendChild(product);
         }
-    }
 }
 
 const renderTotal = function() {
