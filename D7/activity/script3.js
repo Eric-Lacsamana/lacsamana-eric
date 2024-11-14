@@ -22,23 +22,6 @@ const cartList = document.getElementById('cart-list');
 const productList = document.getElementById('product-list');
 const totalText = document.getElementById('total-text');
 
-const getExistingCartItem = function(productId) {
-    return cart.find(function(cartItem) { 
-        return cartItem.productId === productId 
-    });
-}
-
-const updateCartItem = function(productId) {
-    const index = cart.findIndex(function(cartItem) {
-         return cartItem.productId === productId 
-        });
-
-    if (index !== -1) {
-        cart[index].quantity += 1;
-    }
-}
-
-
 const renderCart = function() {
     cartList.innerHTML = '';
 
@@ -46,8 +29,7 @@ const renderCart = function() {
 
             const cartItem = document.createElement('li');
             cartItem.textContent = `${cart[i].name} Price: $${cart[i].price}`;
-       
-            
+
             const addToCartButton = document.createElement('button');
             addToCartButton.addEventListener('click', function() {
                 cartItem.remove();
@@ -61,9 +43,7 @@ const renderCart = function() {
                 }
 
                 cart.splice(i, 1);
-
                 renderCart();
-                renderProducts();
                 renderTotal();
             });
             addToCartButton.textContent = 'Remove';
@@ -83,26 +63,27 @@ const renderProducts = function() {
 
     for (let i = 0; i < products.length; i++) {
             const product = document.createElement('li');
-    
             product.textContent = `${products[i].name} Price: $${products[i].price}`;
         
             const addToCartButton = document.createElement('button');
-        
             addToCartButton.textContent = 'Add to Cart';
-            
             addToCartButton.addEventListener('click', function()  {
       
-                    const existingCartItem = getExistingCartItem(products[i].productId);
-                    
-                    if (existingCartItem) {
-                        updateCartItem(products[i].productId);
+                    const index = cart.findIndex(function(cartItem) {
+                        return cartItem.productId === products[i].productId 
+                    });
+               
+                    if (index > -1) {
+                        
+                       if (index !== -1) {
+                           cart[index].quantity += 1;
+                       }
                     } 
         
-                    if (!existingCartItem) {
+                    if (index === -1) {
                         cart.push({ ...products[i], quantity: 1 })
                     }
 
-                renderProducts();
                 renderCart();
                 renderTotal();
             });
@@ -121,5 +102,4 @@ const renderTotal = function() {
 };
 
 renderTotal();
-renderCart();
 renderProducts();
