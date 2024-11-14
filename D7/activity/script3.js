@@ -26,16 +26,19 @@ const productList = document.getElementById('product-list');
 const totalText = document.getElementById('total-text');
 
 const getExistingCartItem = function(productId) {
-
-    return cart.find((cartItem) => cartItem.productId === productId);
+    return cart.find(function(cartItem) { 
+        return cartItem.productId === productId 
+    });
 }
 
-const updateCartItem = (productId) => {
-    const indexToReplace = cart.findIndex((cartItem) => cartItem.productId === productId);
+const updateCartItem = function(productId) {
+    const index = cart.findIndex(function(cartItem) {
+         return cartItem.productId === productId 
+        });
 
-    if (indexToReplace !== -1) {
-        cart[indexToReplace].quantity += 1;
-    } 
+    if (index !== -1) {
+        cart[index].quantity += 1;
+    }
 }
 
 
@@ -49,10 +52,12 @@ const renderCart = function() {
        
             
             const addToCartButton = document.createElement('button');
-            addToCartButton.addEventListener('click', () => {
+            addToCartButton.addEventListener('click', function() {
                 cartItem.remove();
                 
-                const productIndex = products.findIndex((product) => product.productId === cart[i].productId);
+                const productIndex = products.findIndex(function(product) { 
+                    return product.productId === cart[i].productId 
+                });
                         
                 if (productIndex > -1) {
                     products[productIndex].quantity = 3;
@@ -90,7 +95,7 @@ const renderProducts = function() {
         
             addToCartButton.textContent = 'Add to Cart';
             
-            addToCartButton.addEventListener('click', () => {
+            addToCartButton.addEventListener('click', function()  {
              
                 if (products[i].quantity !== 0) {
      
@@ -118,7 +123,7 @@ const renderProducts = function() {
     }
 }
 
-const renderTotal = () => {
+const renderTotal = function() {
     let total = 0;
     for (let i = 0; i < cart.length; i++) {
         total += cart[i].price * cart[i].quantity; 
