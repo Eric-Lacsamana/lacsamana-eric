@@ -83,7 +83,7 @@ const renderCart = function() {
 
 const renderProducts = function() {
     productList.innerHTML = '';
-    console.log('PRODUCTS', cart);
+
     for (let i = 0; i < products.length; i++) {
         if (products[i].quantity >= 1) {
     
