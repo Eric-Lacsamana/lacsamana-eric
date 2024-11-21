@@ -1,0 +1,18 @@
+[{
+  "_id": {
+    "$oid": "673ddb91e9b5527cf02ac917"
+  },
+  "name": "Programming"
+},
+{
+  "_id": {
+    "$oid": "673ddb91e9b5527cf02ac918"
+  },
+  "name": "Data Science"
+},
+{
+  "_id": {
+    "$oid": "673ddb91e9b5527cf02ac919"
+  },
+  "name": "Design"
+}]
