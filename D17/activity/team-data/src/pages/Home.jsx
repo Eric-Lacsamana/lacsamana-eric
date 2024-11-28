@@ -12,7 +12,7 @@ const Home = () => {
           <Col xs={12} md={8} lg={6}>
             <div className="hero-section text-center">
               <h1>Welcome to the DevTeam</h1>
-              <div className="team-members-info mt-4">
+              <div className="just-wow-info mt-4">
                 <h3>Just Wow!</h3>
               </div>
               <div className="ready-to-meet mt-4">

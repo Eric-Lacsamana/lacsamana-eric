@@ -1,6 +1,6 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
-import { FaUser, FaEnvelope } from 'react-icons/fa'; // Icons for the card
+import { FaUser, FaEnvelope } from 'react-icons/fa';
 import { Link, Outlet, useParams } from 'react-router-dom';
 
 const team = [

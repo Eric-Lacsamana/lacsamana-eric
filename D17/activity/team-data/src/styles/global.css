@@ -26,8 +26,7 @@
     margin-bottom: 20px;
   }
   
-  /* Styling for the total team members section */
-  .team-members-info {
+  .just-wow-info {
     background-color: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 8px;
@@ -35,12 +34,12 @@
     margin-top: 30px;
   }
   
-  .team-members-info h3 {
+  .just-wow-info h3 {
     font-size: 1.8rem;
     margin-bottom: 10px;
   }
   
-  .team-members-info p {
+  .just-wow-info p {
     font-size: 1.2rem;
     font-weight: bold;
   }
