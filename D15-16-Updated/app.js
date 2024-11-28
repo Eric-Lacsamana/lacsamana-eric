@@ -5,6 +5,7 @@ import cors from 'cors';
 // Import Routes
 import authRoutes from './routes/authRoutes.js';
 import blogRoutes from './routes/blogRoutes.js';
+import commentRoutes from './routes/commentRoutes.js';
 
 
 const port = process.env.PORT || 3000;
@@ -22,6 +23,7 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 // Routes
 app.use('/api/blogs', blogRoutes);
+app.use('/api/comments', commentRoutes);
 
 // Connect to MongoDB
 const connectToDatabase = async () => {

@@ -2,7 +2,6 @@ import Blog from '../models/Blog.js';
 
 // Create a new blog post
 const createBlog = async (req, res) => {
-    console.log('blog', req.user);
     try {
         const { title, content } = req.body;
 
@@ -29,7 +28,13 @@ const getBlogById = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const blog = await Blog.findById(id).populate('author', 'name');
+        const blog = await Blog.findById(id).populate('author', 'name').populate({
+            path: 'comments',
+            populate: {
+                path: 'author',
+                select: 'name'
+            }
+        });
         if (!blog) return res.status(404).json({ error: 'Blog not found' });
 
         res.status(200).json(blog);
@@ -49,7 +54,9 @@ const updateBlog = async (req, res) => {
         }
 
         const blog = await Blog.findByIdAndUpdate(id, { title, content }, { new: true });
-      
+
+        if (blog.author._id.toString() !== req.user._id) return res.status(403).json({ error: 'Unauthorize Error' });
+
         if (!blog) {
             return res.status(404).json({ error: 'Blog not found' });
         }
@@ -64,11 +71,18 @@ const deleteBlog = async (req, res) => {
     try {
         const { id } = req.params;
 
-        const blog = await Blog.findByIdAndDelete(id);
 
+        const blog = await Blog.findById(id).populate('author', 'name');
+        console.log('test', blog, id);
+        
         if (!blog) {
             return res.status(404).json({ error: 'Blog not found' });
         }
+
+        if (blog.author._id.toString() !== req.user._id) return res.status(403).json({ error: 'Unauthorize Error' });
+
+
+        await Blog.findByIdAndDelete(id);
 
         res.status(200).json({ message: 'Blog deleted successfully' });
     } catch (error) {
