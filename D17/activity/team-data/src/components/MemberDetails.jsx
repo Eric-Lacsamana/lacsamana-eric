@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaUserAlt } from 'react-icons/fa'; // Import only the icon needed for bio (optional)
-import { Card } from 'react-bootstrap'; // Using Bootstrap for Card styling
+import { FaUserAlt } from 'react-icons/fa';
+import { Card } from 'react-bootstrap';
 
 function MemberDetails({ data }) {
   return (
