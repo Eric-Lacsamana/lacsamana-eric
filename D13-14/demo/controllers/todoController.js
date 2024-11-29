@@ -39,7 +39,7 @@ const getTodoById = async (req, res) => {
     }
 }
 
-// Update Todo
+
 const updateTodo = async (req, res) => {
     try {
         const { id } = req.params;
@@ -51,7 +51,7 @@ const updateTodo = async (req, res) => {
            res.status(500).json({ error: 'Server error'});
     }
 }
-// Delete Todo
+
 const deleteTodo = async (req, res) => {
     try {
         const { id } = req.params;

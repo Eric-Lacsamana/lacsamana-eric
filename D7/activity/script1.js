@@ -28,7 +28,6 @@ function handleSubmit(event) {
 
     const monthlyPayment = calculateMonthlyPayment(amount, interest, term);
   
-    
     const outputText = document.getElementById('monthly-payment');
     outputText.innerHTML = `Monthly Payment: $${monthlyPayment}`;
 }

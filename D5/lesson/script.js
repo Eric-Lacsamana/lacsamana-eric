@@ -91,6 +91,6 @@ let sunny = true;
 let warm = false;
 
 console.log("True and False", sunny && warm);
-console.log("True and True", sunny && sunny);
+// console.log("True and True", sunny && sunny);
 console.log("True || False", sunny && warm);
 console.log("Not Trye", !sunny);

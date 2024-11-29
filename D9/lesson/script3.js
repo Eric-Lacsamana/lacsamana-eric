@@ -37,7 +37,7 @@ const displayUserData = async () => {
         });
 
         // Insert the generated HTML markup into the user container
-        userContainer.innerHTML = html;
+       return userContainer.innerHTML = html;
     } catch (error) {
         // Display an error message if fetching data fails
         userContainer.innerHTML = "An error occurred while fetching data.";
