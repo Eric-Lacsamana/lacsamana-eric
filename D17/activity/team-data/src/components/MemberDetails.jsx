@@ -1,6 +1,6 @@
 import React from 'react';
-import { FaUserAlt } from 'react-icons/fa';
 import { Card } from 'react-bootstrap';
+import PropTypes from 'prop-types'; // Import PropTypes
 
 function MemberDetails({ data }) {
   return (
@@ -18,5 +18,12 @@ function MemberDetails({ data }) {
     </div>
   );
 }
+
+MemberDetails.propTypes = {
+  data: PropTypes.shape({
+    name: PropTypes.string.isRequired,  
+    bio: PropTypes.string.isRequired,  
+  }).isRequired,
+};
 
 export default MemberDetails;
