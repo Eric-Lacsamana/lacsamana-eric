@@ -9,7 +9,7 @@ function App() {
     <Router>
       <AppNavbar />
       <Routes>
-        <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home />} />
         <Route path="/teams" element={<Teams />}>
           <Route path=":id" element={<TeamMemberDetails />} />
         </Route>
