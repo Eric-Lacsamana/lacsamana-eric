@@ -25,24 +25,6 @@ function ProductPage() {
     fetchProducts();
   }, [])
 
-  // // Todo: replace with api call fetch 
-  // const products = [
-  //   {
-  //     title: "Example Product 1",
-  //     price: 29.99,
-  //     description: "This is a detailed description of the product.",
-  //     category: "Electronics",
-  //     image: "https://via.placeholder.com/400",
-  //   },
-  //   {
-  //     title: "Example Product 2",
-  //     price: 49.99,
-  //     description: "Another detailed description of a different product.",
-  //     category: "Home Appliances",
-  //     image: "https://via.placeholder.com/400",
-  //   },
-  // ];
-
   const handleViewDetails = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
