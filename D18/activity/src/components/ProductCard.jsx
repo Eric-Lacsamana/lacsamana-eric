@@ -4,10 +4,10 @@ import { Card, Button } from 'react-bootstrap';
 
 function ProductCard({ product, onViewDetails }) {
   return (
-    <Card style={{ width: '18rem' }}>
-      <Card.Img variant="top" src={product.image} alt={product.title} />
+    <Card className="product-card">
+      <Card.Img variant="top" src={product.image} alt={product.title} className="product-card-img" />
       <Card.Body>
-        <Card.Title>{product.title}</Card.Title>
+        <Card.Title className="product-card-title">{product.title}</Card.Title>
         <Card.Text>
           <strong>Price:</strong> ₱{product.price}
         </Card.Text>
