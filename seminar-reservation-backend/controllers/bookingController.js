@@ -21,7 +21,7 @@ const createBooking = async (req, res) => {
 
 const getUserBookings = async (req, res) => {
   try {
-    const bookings = await Booking.find({ user: req.user.id }).populate('seminar');
+    const bookings = await Booking.find({ user: req.user.id }).populate('seminar').populate('user', '-_id firstName lastName');;
     res.status(200).json(bookings);
   } catch (error) {
     res.status(500).json({ message: 'Error fetching bookings', error });
