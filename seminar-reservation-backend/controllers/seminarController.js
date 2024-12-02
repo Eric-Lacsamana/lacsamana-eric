@@ -38,8 +38,7 @@ const deleteSeminar = async (req, res) => {
   }
 };
 
-
-export const getSeminarDetails = async (req, res) => {
+const getSeminarDetails = async (req, res) => {
   try {
     const seminar = await Seminar.findById(req.params.id);
     if (!seminar) return res.status(404).json({ message: 'Seminar not found' });
