@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types'; // Import PropTypes for type safety
+import PropTypes from 'prop-types';
 import { useForm } from '../hooks/useForm';
 
 const SeminarForm = ({ onSubmit }) => {
@@ -42,19 +42,18 @@ const SeminarForm = ({ onSubmit }) => {
 
       <div className="grid grid-cols-1">
         <div className="form-control">
-            <label className="label">
-              <span className="label-text">Description</span>
-            </label>
-            <textarea
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              className="textarea textarea-bordered w-full"
-              required
-            />
+          <label className="label">
+            <span className="label-text">Description</span>
+          </label>
+          <textarea
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            className="textarea textarea-bordered w-full"
+            required
+          />
         </div>
       </div>
-
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="form-control">
@@ -99,19 +98,19 @@ const SeminarForm = ({ onSubmit }) => {
             required
           />
         </div>
-            <div className="form-control">
-              <label className="label">
-                <span className="label-text">To</span>
-              </label>
-              <input
-                type="time"
-                name="timeFrame.to"
-                value={formData.timeFrame.to}
-                onChange={handleChange}
-                className="input input-bordered w-full"
-                required
-              />
-          </div>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">To</span>
+          </label>
+          <input
+            type="time"
+            name="timeFrame.to"
+            value={formData.timeFrame.to}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -129,20 +128,19 @@ const SeminarForm = ({ onSubmit }) => {
           />
         </div>
 
-      <div className="form-control">
-        <label className="label">
-          <span className="label-text">Speaker LinkedIn</span>
-        </label>
-        <input
-          type="url"
-          name="speaker.linkedin"
-          value={formData.speaker.linkedin}
-          onChange={handleChange}
-          className="input input-bordered w-full"
-        />
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Speaker LinkedIn</span>
+          </label>
+          <input
+            type="url"
+            name="speaker.linkedin"
+            value={formData.speaker.linkedin}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+          />
+        </div>
       </div>
-      </div>
-
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="form-control">
@@ -179,7 +177,6 @@ const SeminarForm = ({ onSubmit }) => {
   );
 };
 
-// Define prop types for the component
 SeminarForm.propTypes = {
   onSubmit: PropTypes.func.isRequired,
 };
