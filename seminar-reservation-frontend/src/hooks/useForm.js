@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 function setNestedValue(obj, path, value) {
   const keys = path.split('.');
   let current = obj;
