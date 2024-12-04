@@ -35,16 +35,4 @@ ProductDetailsModal.propTypes = {
   onClose: PropTypes.func,
 };
 
-ProductDetailsModal.defaultProps = {
-  product: {
-    title: '',
-    price: 0,
-    description: 'No description available.',
-    category: '',
-    image: '',
-  },
-  isOpen: false,
-  onClose: () => {},
-};
-
 export default ProductDetailsModal;

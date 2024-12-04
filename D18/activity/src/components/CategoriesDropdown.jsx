@@ -48,9 +48,4 @@ CategoriesDropdown.propTypes = {
   value: PropTypes.string,
 };
 
-CategoriesDropdown.defaultProps = {
-  onChange: () => {},
-  value: '',
-};
-
 export default CategoriesDropdown;
