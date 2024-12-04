@@ -15,7 +15,7 @@ const SeminarCard = ({
       <Link to={`/admin/seminars/${data._id}`} className="block">
         <figure className="overflow-hidden">
           <img 
-            src="https://via.placeholder.com/100" 
+            src="https://via.placeholder.com/500" 
             alt="Seminar Thumbnail" 
             className="w-full h-auto" 
           />
