@@ -40,7 +40,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 0.9rem;
-    margin-bottom: 10px;
 }
 
 .card-price, .card-rating, .card-category {
