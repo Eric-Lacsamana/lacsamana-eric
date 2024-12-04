@@ -21,6 +21,7 @@ export function useForm(initialValues) {
 
   return {
     formData,
+    setInitialData: setFormData,
     handleChange,
     handleSubmit,
     isLoading,
