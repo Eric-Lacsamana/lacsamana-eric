@@ -18,10 +18,22 @@ const AddSeminarPage = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setSeminarData((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    // Handle nested fields like timeFrame and speaker
+    if (name.includes('timeFrame') || name.includes('speaker')) {
+      const [section, key] = name.split('.');
+      setSeminarData((prev) => ({
+        ...prev,
+        [section]: {
+          ...prev[section],
+          [key]: value,
+        },
+      }));
+    } else {
+      setSeminarData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -139,3 +151,55 @@ const AddSeminarPage = () => {
           />
         </div>
 
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Speaker LinkedIn</label>
+          <input
+            type="url"
+            name="speaker.linkedin"
+            value={seminarData.speaker.linkedin}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Fee</label>
+          <input
+            type="number"
+            name="fee"
+            value={seminarData.fee}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+            min="0"
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Slots Available</label>
+          <input
+            type="number"
+            name="slotsAvailable"
+            value={seminarData.slotsAvailable}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+            min="1"
+          />
+        </div>
+
+        <div className="flex justify-center mt-6">
+          <button
+            type="submit"
+            className="btn btn-primary w-full max-w-xs"
+            disabled={loading}
+          >
+            {loading ? 'Submitting...' : 'Create Seminar'}
+          </button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+export default AddSeminarPage;
