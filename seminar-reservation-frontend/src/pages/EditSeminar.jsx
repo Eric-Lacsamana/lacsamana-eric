@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useHistory } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import SeminarForm from '../components/SeminarForm';
 
 const EditSeminarPage = () => {
@@ -7,7 +7,6 @@ const EditSeminarPage = () => {
   const [seminar, setSeminar] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-  const history = useHistory();
 
   useEffect(() => {
     const fetchSeminar = async () => {
@@ -46,7 +45,6 @@ const EditSeminarPage = () => {
         throw new Error('Failed to update seminar');
       }
 
-      history.push(`/seminars/${seminarId}`);
     } catch (err) {
       setError(err.message);
     } finally {
