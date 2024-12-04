@@ -10,31 +10,32 @@ export const AuthProvider = ({ children }) => {
         const token = localStorage.getItem('jwtToken');
         if (token) {
             setIsAuthenticated(true);
-        } else  {
+        } else {
             setIsAuthenticated(false);
         }
-        
+
         const handleStorageChange = (e) => {
-            if (e.key === 'jwtToken' && e.nueValue === null) {
+            if (e.key === 'jwtToken' && e.newValue === null) {
                 setIsAuthenticated(false);
+            } else if (e.key === 'jwtToken' && e.newValue !== null) {
+                setIsAuthenticated(true);
             }
-        }
+        };
+
+        window.addEventListener('storage', handleStorageChange);
 
         return () => {
             window.removeEventListener('storage', handleStorageChange);
-        }
+        };
     }, []);
-
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
             {children}
         </AuthContext.Provider>
-    )
-}
-
+    );
+};
 
 AuthProvider.propTypes = {
-    children:  PropTypes.node.isRequired
+    children: PropTypes.node.isRequired,
 };
-  
