@@ -8,17 +8,15 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
-        if (token) {
-            setIsAuthenticated(true);
-        } else {
-            setIsAuthenticated(false);
-        }
+        setIsAuthenticated(!!token);
 
         const handleStorageChange = (e) => {
-            if (e.key === 'jwtToken' && e.newValue === null) {
-                setIsAuthenticated(false);
-            } else if (e.key === 'jwtToken' && e.newValue !== null) {
-                setIsAuthenticated(true);
+            if (e.key === 'jwtToken') {
+                if (e.newValue === null) {
+                    setIsAuthenticated(false);
+                } else {
+                    setIsAuthenticated(true);
+                }
             }
         };
 
