@@ -10,8 +10,16 @@ const SeminarDetailsPage = () => {
 
   useEffect(() => {
     const fetchSeminarDetails = async () => {
+      const token = localStorage.getItem('jwtToken');
+      
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars/${id}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch seminar details');
         }
