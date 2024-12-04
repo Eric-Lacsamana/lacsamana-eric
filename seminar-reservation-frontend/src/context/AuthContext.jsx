@@ -5,6 +5,7 @@ export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const token = localStorage.getItem('jwtToken');
@@ -22,13 +23,15 @@ export const AuthProvider = ({ children }) => {
 
         window.addEventListener('storage', handleStorageChange);
 
+        setIsLoading(false);
+
         return () => {
             window.removeEventListener('storage', handleStorageChange);
         };
     }, []);
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated, isLoading }}>
             {children}
         </AuthContext.Provider>
     );
