@@ -14,7 +14,11 @@ const SeminarCard = ({
     <div className="card bg-white border-2 border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
       <Link to={`/admin/seminars/${data._id}`} className="block">
         <figure className="overflow-hidden">
-          View
+          <img 
+            src="https://via.placeholder.com/100" 
+            alt="Seminar Thumbnail" 
+            className="w-full h-auto" 
+          />
         </figure>
       </Link>
 
@@ -40,7 +44,7 @@ const SeminarCard = ({
         </div>
 
         <div className="card-actions justify-end mt-4">
-          <Link to={`/admin/seminars/${data._id}/edit`} className="btn btn-secondary mr-2">Edit</Link>
+          <Link to={`/admin/seminars/${data._id}/edit`} className="btn btn-primary mr-2">Edit</Link>
           <button 
             onClick={() => onDelete(data._id)} 
             className="btn btn-danger"
@@ -52,7 +56,6 @@ const SeminarCard = ({
     </div>
   );
 };
-
 
 SeminarCard.propTypes = {
   data: PropTypes.shape({
