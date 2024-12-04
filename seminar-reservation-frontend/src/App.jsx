@@ -14,8 +14,6 @@ function App() {
     <Router>
         <Routes>
           <Route path='/login' element={<Login />} />
-   
-
           <Route element={<AuthenticatedLayout />}>
             <Route path='/' element={null} />
             <Route path='/admin/seminars' element={<SeminarsPage />} />
