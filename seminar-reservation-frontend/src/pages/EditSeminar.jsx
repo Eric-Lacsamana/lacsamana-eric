@@ -76,7 +76,7 @@ const EditSeminarPage = () => {
   return (
     <div className="max-w-3xl mx-auto p-4">
       <h1 className="text-3xl font-bold text-center mb-8">Edit Seminar</h1>
-      <SeminarForm onSubmit={(e, formData) => handleSubmit(e, formData)} initialData={seminar} />
+      <SeminarForm onSubmit={handleSubmit} initialData={seminar} />
       <div className="flex justify-center mt-6">
         <button
           type="submit"
