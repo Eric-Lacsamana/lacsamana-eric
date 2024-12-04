@@ -1,18 +1,26 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import SeminarForm from '../components/SeminarForm';
 
 const EditSeminarPage = () => {
-  const { seminarId } = useParams();
+  const { id } = useParams();
+  const navigate = useNavigate();
   const [seminar, setSeminar] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const token = localStorage.getItem('jwtToken');
 
   useEffect(() => {
     const fetchSeminar = async () => {
       setIsLoading(true);
       try {
-        const response = await fetch(`http://localhost:5000/api/seminars/${seminarId}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars/${id}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch seminar');
         }
@@ -26,17 +34,17 @@ const EditSeminarPage = () => {
     };
 
     fetchSeminar();
-  }, [seminarId]);
+  }, [id, token]);
 
-  const handleSubmit = async (e, formData) => {
-    e.preventDefault();
+  const handleSubmit = async (formData) => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`http://localhost:5000/api/seminars/${seminarId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars/${id}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(formData),
       });
@@ -45,6 +53,7 @@ const EditSeminarPage = () => {
         throw new Error('Failed to update seminar');
       }
 
+      navigate('/admin/seminars'); 
     } catch (err) {
       setError(err.message);
     } finally {
