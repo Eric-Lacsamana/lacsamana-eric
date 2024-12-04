@@ -1,9 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types'; // Import PropTypes for type safety
 import { useForm } from '../hooks/useForm';
 
-
 const SeminarForm = ({ onSubmit }) => {
-  const { 
+  const {
     formData,
     handleChange,
     handleSubmit,
@@ -16,12 +16,19 @@ const SeminarForm = ({ onSubmit }) => {
     speaker: { name: '', linkedin: '' },
     fee: 0,
     slotsAvailable: 0,
-  })
+  });
 
   return (
-      <form id="add-seminar-form" onSubmit={(e)=> handleSubmit(e, )}>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Title</label>
+    <form
+      id="add-seminar-form"
+      onSubmit={(e) => handleSubmit(e, onSubmit)}
+      className="space-y-6"
+    >
+      <div className="grid grid-cols-1">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Title</span>
+          </label>
           <input
             type="text"
             name="title"
@@ -31,20 +38,29 @@ const SeminarForm = ({ onSubmit }) => {
             required
           />
         </div>
+      </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Description</label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            className="textarea textarea-bordered w-full"
-            required
-          />
+      <div className="grid grid-cols-1">
+        <div className="form-control">
+            <label className="label">
+              <span className="label-text">Description</span>
+            </label>
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
+              className="textarea textarea-bordered w-full"
+              required
+            />
         </div>
+      </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Date</label>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Date</span>
+          </label>
           <input
             type="date"
             name="date"
@@ -54,34 +70,10 @@ const SeminarForm = ({ onSubmit }) => {
             required
           />
         </div>
-
-        <div className="mb-4 flex space-x-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700">From</label>
-            <input
-              type="time"
-              name="timeFrame.from"
-              value={formData.timeFrame.from}
-              onChange={handleChange}
-              className="input input-bordered"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">To</label>
-            <input
-              type="time"
-              name="timeFrame.to"
-              value={formData.timeFrame.to}
-              onChange={handleChange}
-              className="input input-bordered"
-              required
-            />
-          </div>
-        </div>
-
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Venue</label>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Venue</span>
+          </label>
           <input
             type="text"
             name="venue"
@@ -91,9 +83,42 @@ const SeminarForm = ({ onSubmit }) => {
             required
           />
         </div>
+      </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Speaker Name</label>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">From</span>
+          </label>
+          <input
+            type="time"
+            name="timeFrame.from"
+            value={formData.timeFrame.from}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+            <div className="form-control">
+              <label className="label">
+                <span className="label-text">To</span>
+              </label>
+              <input
+                type="time"
+                name="timeFrame.to"
+                value={formData.timeFrame.to}
+                onChange={handleChange}
+                className="input input-bordered w-full"
+                required
+              />
+          </div>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Speaker Name</span>
+          </label>
           <input
             type="text"
             name="speaker.name"
@@ -104,19 +129,26 @@ const SeminarForm = ({ onSubmit }) => {
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Speaker LinkedIn</label>
-          <input
-            type="url"
-            name="speaker.linkedin"
-            value={formData.speaker.linkedin}
-            onChange={handleChange}
-            className="input input-bordered w-full"
-          />
-        </div>
+      <div className="form-control">
+        <label className="label">
+          <span className="label-text">Speaker LinkedIn</span>
+        </label>
+        <input
+          type="url"
+          name="speaker.linkedin"
+          value={formData.speaker.linkedin}
+          onChange={handleChange}
+          className="input input-bordered w-full"
+        />
+      </div>
+      </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Fee</label>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Fee</span>
+          </label>
           <input
             type="number"
             name="fee"
@@ -128,8 +160,10 @@ const SeminarForm = ({ onSubmit }) => {
           />
         </div>
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">Slots Available</label>
+        <div className="form-control">
+          <label className="label">
+            <span className="label-text">Slots Available</span>
+          </label>
           <input
             type="number"
             name="slotsAvailable"
@@ -140,9 +174,14 @@ const SeminarForm = ({ onSubmit }) => {
             min="1"
           />
         </div>
-      </form>
+      </div>
+    </form>
   );
 };
 
+// Define prop types for the component
+SeminarForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
+};
 
 export default SeminarForm;
