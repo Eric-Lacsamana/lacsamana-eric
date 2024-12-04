@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   const handleHomeClick = () => {
-    navigate('/admin/seminars');
+    navigate('/');
   }
 
   const toggleMenu = () => {
@@ -19,14 +19,11 @@ const Navbar = () => {
   };
 
   return (
-    <div className="navbar bg-base-100">
+    <div className="navbar bg-blue-600 fixed top-0 left-0 right-0 z-10">
       <div className="flex-1">
-        <a className="btn btn-ghost text-xl" onClick={handleHomeClick}>Admin Seminar Dashboard</a>
+        <a className="btn btn-ghost text-white text-xl" onClick={handleHomeClick}>Dashboard</a>
       </div>
       <div className="flex-none gap-2">
-        {/* <div className="form-control">
-          <input type="text" placeholder="Search" className="input input-bordered w-24 md:w-auto" />
-        </div> */}
         <div className="dropdown dropdown-end">
           <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar" onClick={toggleMenu}>
             <div className="w-10 rounded-full">
@@ -38,7 +35,7 @@ const Navbar = () => {
           {isMenuOpen && (
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-blue-600 text-white rounded-box z-[1] mt-3 w-52 p-2 shadow"
             >
               <li>
                 <a className="justify-between">
