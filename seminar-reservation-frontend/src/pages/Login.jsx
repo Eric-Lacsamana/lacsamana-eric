@@ -7,14 +7,13 @@ const Login = () => {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = async (data) => {
-    const { email, password} = data;
-
+  const handleSubmit = async (formData) => {
+    const { email, password } = formData;
     setLoading(true);
     setError(null);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -22,27 +21,28 @@ const Login = () => {
         body: JSON.stringify({ email, password }),
       });
 
-      const data = await response.json();
+      const responseData = await response.json(); 
 
       if (response.ok) {
 
-        localStorage.setItem('jwtToken', data.token);
-
+        localStorage.setItem('jwtToken', responseData.token);
         navigate('/admin/seminars');
       } else {
-        throw new Error(data.message || 'Login failed');
+
+        throw new Error(responseData.message || 'Login failed');
       }
     } catch (err) {
       setError(err.message);
     } finally {
-      setLoading(false);
+      setLoading(false); 
     }
   };
+  
 
   return (
     <div className="max-w-lg mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Admin Login</h1>
-      
+
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
       <LoginForm onSubmit={handleSubmit} />
