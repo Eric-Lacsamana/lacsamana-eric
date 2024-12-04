@@ -26,7 +26,7 @@ const Login = () => {
       if (response.ok) {
 
         localStorage.setItem('jwtToken', responseData.token);
-        navigate('/admin/seminars');
+        navigate('/');
       } else {
 
         throw new Error(responseData.message || 'Login failed');
