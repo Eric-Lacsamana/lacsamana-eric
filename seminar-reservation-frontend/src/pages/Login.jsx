@@ -1,13 +1,14 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import LoginForm from '../components/LoginForm';
+import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
-  const navigate = useNavigate();
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (formData) => {
+
     const { email, password } = formData;
     setLoading(true);
     setError(null);
@@ -26,7 +27,7 @@ const Login = () => {
       if (response.ok) {
 
         localStorage.setItem('jwtToken', responseData.token);
-        navigate('/');
+        setIsAuthenticated(true);
       } else {
 
         throw new Error(responseData.message || 'Login failed');
