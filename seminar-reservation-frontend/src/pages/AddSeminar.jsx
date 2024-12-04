@@ -37,7 +37,7 @@ const AddSeminarPage = () => {
       <SeminarForm onSubmit={handleSubmit} />
       <div className="flex justify-center mt-6">
           <button
-            form='add-seminar-form'
+            form='seminar-form'
             type="submit"
             className="btn btn-primary w-full max-w-xs"
             disabled={isLoading}
