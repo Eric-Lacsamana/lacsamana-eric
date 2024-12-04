@@ -21,19 +21,18 @@ const secretNumber = 7;
 let attempts = 0;
 let guessedNumber;
 
-console.log('Welcome to guessing number game')
+console.log('Welcome to the guessing number game');
 do {
-    guessedNumber = parseInt(prompt("Enter number from 1 to 10:"))
-
+    guessedNumber = parseInt(prompt("Enter a number from 1 to 10:"));
 
     if (guessedNumber > secretNumber) {
         console.log('Too high! Try again.');
     } else if (guessedNumber < secretNumber) {
-        console.log('Too low! Try again.')
-    } else if (guessedNumber === secretNumber) {
-        console.log('It took you '+ attempts + ' attempts');
-    } else if (guessedNumber === secretNumber) {
-        console.log('Congratulations! You guessed the correct number: ' + secretNumber)
+        console.log('Too low! Try again.');
+    } else {
+        console.log('Congratulations! You guessed the correct number: ' + secretNumber);
+        console.log('It took you ' + attempts + ' attempts');
     }
-    attempts++
+
+    attempts++;
 } while (guessedNumber !== secretNumber);
