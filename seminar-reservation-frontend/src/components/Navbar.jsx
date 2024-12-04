@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
+  const { setIsAuthenticated } = useContext(AuthContext);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
   const navigate = useNavigate();
 
   const handleLogout = () => {
     localStorage.removeItem('jwtToken');
-    navigate('/login');
+    setIsAuthenticated(false);
   };
 
   const handleHomeClick = () => {
