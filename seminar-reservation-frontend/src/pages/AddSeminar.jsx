@@ -1,101 +1,141 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 
-const SeminarsPage = () => {
-  const [seminars, setSeminars] = useState([]);
-  const [loading, setLoading] = useState(true);
+const AddSeminarPage = () => {
+  const history = useHistory();
+  const [seminarData, setSeminarData] = useState({
+    title: '',
+    description: '',
+    date: '',
+    timeFrame: { from: '', to: '' },
+    venue: '',
+    speaker: { name: '', linkedin: '' },
+    fee: 0,
+    slotsAvailable: 0,
+  });
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    const fetchSeminars = async () => {
-      try {
-        const response = await fetch('http://localhost:5000/api/seminars');
-        if (!response.ok) {
-          throw new Error('Failed to fetch seminars');
-        }
-        const data = await response.json();
-        setSeminars(data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSeminarData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
 
-    fetchSeminars();
-  }, []);
-
-  const handleDeleteSeminar = async (seminarId) => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/seminars/${seminarId}`, {
-        method: 'DELETE',
+      const response = await fetch('http://localhost:5000/api/seminars', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(seminarData),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to delete seminar');
+        throw new Error('Failed to create seminar');
       }
 
-      setSeminars(seminars.filter(seminar => seminar._id !== seminarId));
+      setLoading(false);
+      history.push('/admin/seminars'); // Redirect to seminar list page
     } catch (err) {
       setError(err.message);
+      setLoading(false);
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p className="text-red-500">{error}</p>;
-
   return (
-    <div className="max-w-7xl mx-auto p-4">
-      <h1 className="text-3xl font-bold text-center mb-8">Admin Dashboard - Upcoming Seminars</h1>
+    <div className="max-w-3xl mx-auto p-4">
+      <h1 className="text-3xl font-bold text-center mb-8">Add New Seminar</h1>
 
-      <div className="text-right mb-4">
-        <Link to="/admin/seminars/add" className="btn btn-primary">Add New Seminar</Link>
-      </div>
+      {error && <p className="text-red-500">{error}</p>}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {seminars.map((seminar) => (
-          <div key={seminar._id} className="card bg-white border-2 border-gray-200 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
-            <Link to={`/admin/seminars/${seminar._id}`}>
-              <figure className="overflow-hidden">
-                {/* TODO: Add Image Placeholder  */}
-              </figure>
-            </Link>
-            <div className="card-body p-4">
-              <h2 className="card-title text-xl font-semibold truncate">{seminar.title}</h2>
-              <p className="text-sm text-gray-700">{seminar.description}</p>
-              <p className="text-sm text-gray-500 mt-2">{new Date(seminar.date).toLocaleDateString()}</p>
+      <form onSubmit={handleSubmit}>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Title</label>
+          <input
+            type="text"
+            name="title"
+            value={seminarData.title}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
 
-              <div className="mt-4">
-                <p><strong>Time:</strong> {seminar.timeFrame.from} - {seminar.timeFrame.to}</p>
-                <p><strong>Venue:</strong> {seminar.venue}</p>
-                <p><strong>Speaker:</strong> {seminar.speaker.name}</p>
-                {seminar.speaker.linkedin && (
-                  <p>
-                    <strong>LinkedIn: </strong>
-                    <a href={seminar.speaker.linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-500">
-                      {seminar.speaker.name}
-                    </a>
-                  </p>
-                )}
-                <p><strong>Fee:</strong> ${seminar.fee}</p>
-                <p><strong>Slots Available:</strong> {seminar.slotsAvailable}</p>
-              </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Description</label>
+          <textarea
+            name="description"
+            value={seminarData.description}
+            onChange={handleChange}
+            className="textarea textarea-bordered w-full"
+            required
+          />
+        </div>
 
-              <div className="card-actions justify-end mt-4">
-                <Link to={`/admin/seminars/edit/${seminar._id}`} className="btn btn-secondary mr-2">Edit</Link>
-                <button 
-                  onClick={() => handleDeleteSeminar(seminar._id)} 
-                  className="btn btn-danger"
-                >
-                  Delete
-                </button>
-              </div>
-            </div>
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Date</label>
+          <input
+            type="date"
+            name="date"
+            value={seminarData.date}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+
+        <div className="mb-4 flex space-x-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700">From</label>
+            <input
+              type="time"
+              name="timeFrame.from"
+              value={seminarData.timeFrame.from}
+              onChange={handleChange}
+              className="input input-bordered"
+              required
+            />
           </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+          <div>
+            <label className="block text-sm font-medium text-gray-700">To</label>
+            <input
+              type="time"
+              name="timeFrame.to"
+              value={seminarData.timeFrame.to}
+              onChange={handleChange}
+              className="input input-bordered"
+              required
+            />
+          </div>
+        </div>
 
-export default SeminarsPage;
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Venue</label>
+          <input
+            type="text"
+            name="venue"
+            value={seminarData.venue}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+
+        <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Speaker Name</label>
+          <input
+            type="text"
+            name="speaker.name"
+            value={seminarData.speaker.name}
+            onChange={handleChange}
+            className="input input-bordered w-full"
+            required
+          />
+        </div>
+
