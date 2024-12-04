@@ -21,9 +21,20 @@ const SeminarForm = ({ onSubmit, initialData }) => {
 
   useEffect(() => {
     if (initialData) {
-      setInitialData(initialData);
+
+      if (initialData.date) {
+        let date = new Date(initialData.date);
+
+        let formattedDate = date.toISOString().split('T')[0];
+
+        setInitialData({ ...initialData, date: formattedDate });
+      } else {
+        setInitialData(initialData);
+      }
+     
     }
   }, [initialData, setInitialData]);
+
 
   return (
     <form
