@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import { AuthContext } from '../context/AuthContext';
@@ -6,17 +6,15 @@ import FloatingButton from '../components/FloatingButton';
 
 const AuthenticatedLayout = () => {
   const navigate = useNavigate();
-  const { isAuthenticated } = useContext(AuthContext);
-  const [isLoading, setIsLoading] = useState(true);
-
+  const { isAuthenticated, isLoading } = useContext(AuthContext);
 
   useEffect(() => {
-    if (isAuthenticated === false) {
-      navigate('/login');
-    } else if (isAuthenticated !== undefined) {
-      setIsLoading(false);
+    if (!isLoading) {
+      if (isAuthenticated === false) {
+        navigate('/login');
+      }
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, isLoading, navigate]);
 
   if (isLoading) {
     return <div>Loading...</div>;
