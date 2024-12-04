@@ -16,7 +16,7 @@ export default function LoginForm({ onSubmit }) {
         <input
           type="email"
           id="email"
-          name="email"  // Make sure 'name' is provided so it can be captured in handleChange
+          name="email"
           value={formData.email}
           onChange={handleChange}
           className="input input-bordered w-full px-4 py-2 rounded-lg"
@@ -29,7 +29,7 @@ export default function LoginForm({ onSubmit }) {
         <input
           type="password"
           id="password"
-          name="password"  // Also add 'name' for this input
+          name="password"
           value={formData.password}
           onChange={handleChange}
           className="input input-bordered w-full px-4 py-2 rounded-lg"
