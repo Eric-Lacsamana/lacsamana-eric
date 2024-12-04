@@ -5,11 +5,14 @@ const SeminarsPage = () => {
   const [seminars, setSeminars] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const token = localStorage.getItem('jwtToken');
 
   useEffect(() => {
     const fetchSeminars = async () => {
+
       try {
         const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars`);
+
         if (!response.ok) {
           throw new Error('Failed to fetch seminars');
         }
@@ -29,6 +32,10 @@ const SeminarsPage = () => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars/${seminarId}`, {
         method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
       });
 
       if (!response.ok) {
@@ -84,7 +91,7 @@ const SeminarsPage = () => {
               </div>
 
               <div className="card-actions justify-end mt-4">
-                <Link to={`/admin/seminars/edit/${seminar._id}`} className="btn btn-secondary mr-2">Edit</Link>
+                <Link to={`/admin/seminars/${seminar._id}/edit`} className="btn btn-secondary mr-2">Edit</Link>
                 <button 
                   onClick={() => handleDeleteSeminar(seminar._id)} 
                   className="btn btn-danger"
