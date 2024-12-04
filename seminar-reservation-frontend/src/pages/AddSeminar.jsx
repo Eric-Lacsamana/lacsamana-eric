@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-
 import SeminarForm from '../components/SeminarForm';
 
 const AddSeminarPage = () => {
@@ -9,23 +8,30 @@ const AddSeminarPage = () => {
     e.preventDefault();
     setIsLoading(true);
 
+
+    const token = localStorage.getItem('jwtToken');
+
+    if (!token) {
+      console.error('No token found');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:5000/api/seminars', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
-        // body: JSON.stringify(formData),
       });
 
       if (!response.ok) {
         throw new Error('Failed to create seminar');
       }
 
-    
     } catch (err) {
-      // setError(err.message);
-
+      console.error('Error:', err);
     }
 
     setIsLoading(false);
@@ -36,15 +42,15 @@ const AddSeminarPage = () => {
       <h1 className="text-3xl font-bold text-center mb-8">Add New Seminar</h1>
       <SeminarForm onSubmit={handleSubmit} />
       <div className="flex justify-center mt-6">
-          <button
-            form='seminar-form'
-            type="submit"
-            className="btn btn-primary w-full max-w-xs"
-            disabled={isLoading}
-          >
-            {isLoading ? 'Submitting...' : 'Create Seminar'}
-          </button>
-        </div>
+        <button
+          form="seminar-form"
+          type="submit"
+          className="btn btn-primary w-full max-w-xs"
+          disabled={isLoading}
+        >
+          {isLoading ? 'Submitting...' : 'Create Seminar'}
+        </button>
+      </div>
     </div>
   );
 };
