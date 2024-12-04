@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import SeminarForm from '../components/SeminarForm';
 
 const AddSeminarPage = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const handleSubmit = async (data) => {
+    const payload = JSON.stringify(data);
 
+    setIsLoading(true);
 
     const token = localStorage.getItem('jwtToken');
 
@@ -24,12 +26,14 @@ const AddSeminarPage = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
+        body: payload,
       });
 
       if (!response.ok) {
         throw new Error('Failed to create seminar');
       }
-
+  
+      navigate('/admin/seminars'); 
     } catch (err) {
       console.error('Error:', err);
     }
