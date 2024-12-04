@@ -3,7 +3,7 @@ import PublicLayout from './layouts/PublicLayout';
 import AuthenticatedLayout from './layouts/AuthenticatedLayout';
 import SeminarsPage from './pages/Seminars';
 import AddSeminarPage from './pages/AddSeminar';
-import Seminar from './pages/Seminar';
+import SeminarDetails from './pages/SeminarDetails';
 import EditSeminarPage from './pages/EditSeminar';
 import Login from './pages/Login';
 import { AuthProvider } from './context/AuthContext';
@@ -22,7 +22,7 @@ function App() {
             <Route path='/' element={<DashboardPage /> } />
             <Route path='/admin/seminars' element={<SeminarsPage />} />
             <Route path="/admin/seminars/add" element={<AddSeminarPage />} />
-            <Route path="/admin/seminars/:id" element={<Seminar />} />
+            <Route path="/admin/seminars/:id" element={<SeminarDetails />} />
             <Route path="/admin/seminars/:id/edit" element={<EditSeminarPage />} />
           </Route>
         </Routes>
