@@ -21,9 +21,7 @@ function setNestedValue(obj, path, value) {
 
 export function useForm(initialValues) {
   const [formData, setFormData] = useState(initialValues);
-  const [error, setError] = useState(null);
-  const [isLoading, setLoading] = useState(false);
-  console.log('FORM DATA', formData);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
 
@@ -32,7 +30,6 @@ export function useForm(initialValues) {
 
   const handleSubmit = (e, onSubmit) => {
     e.preventDefault();
-    setLoading(true);
     onSubmit(formData);
   };
 
@@ -41,8 +38,5 @@ export function useForm(initialValues) {
     setInitialData: setFormData,
     handleChange,
     handleSubmit,
-    isLoading,
-    setError,
-    error,
   };
 }
