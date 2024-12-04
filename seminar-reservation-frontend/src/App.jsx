@@ -4,6 +4,7 @@ import SeminarsPage from './pages/Seminars';
 import Seminar from './pages/Seminar';
 import EditSeminar from './pages/EditSeminar';
 import Login from './pages/Login';
+import AddSeminarPage from './pages/AddSeminar';
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
     <Router>
         <Routes>
           <Route path='/login' element={<Login />} />
+          <Route path="/admin/seminars/add" element={<AddSeminarPage />} />
           <Route element={<AuthenticatedLayout />}>
             <Route path='/' element={null} />
             <Route path='/admin/seminars' element={<SeminarsPage />} />
