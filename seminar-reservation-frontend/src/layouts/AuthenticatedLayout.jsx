@@ -9,18 +9,17 @@ const AuthenticatedLayout = () => {
   const { isAuthenticated } = useContext(AuthContext);
   const [isLoading, setIsLoading] = useState(true);
 
+
   useEffect(() => {
-    if (isAuthenticated !== undefined) {
+    if (isAuthenticated === false) {
+      navigate('/login');
+    } else if (isAuthenticated !== undefined) {
       setIsLoading(false);
     }
-  }, [isAuthenticated]);
+  }, [isAuthenticated, navigate]);
 
   if (isLoading) {
     return <div>Loading...</div>;
-  }
-
-  if (!isAuthenticated) {
-    return navigate('/login');
   }
 
   return (
