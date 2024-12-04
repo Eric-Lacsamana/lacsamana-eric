@@ -6,11 +6,10 @@ const SeminarsPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch seminars on initial load
   useEffect(() => {
     const fetchSeminars = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/seminars');
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars`);
         if (!response.ok) {
           throw new Error('Failed to fetch seminars');
         }
@@ -28,7 +27,7 @@ const SeminarsPage = () => {
 
   const handleDeleteSeminar = async (seminarId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/seminars/${seminarId}`, {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars/${seminarId}`, {
         method: 'DELETE',
       });
 
@@ -80,7 +79,7 @@ const SeminarsPage = () => {
                     </a>
                   </p>
                 )}
-                <p><strong>Fee:</strong> ${seminar.fee}</p>
+                <p><strong>Fee:</strong> ₱ {seminar.fee}</p>
                 <p><strong>Slots Available:</strong> {seminar.slotsAvailable}</p>
               </div>
 

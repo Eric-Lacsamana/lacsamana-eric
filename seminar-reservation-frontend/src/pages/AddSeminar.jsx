@@ -20,7 +20,7 @@ const AddSeminarPage = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5000/api/seminars', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/seminars`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
