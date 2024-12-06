@@ -16,6 +16,7 @@ function multiply(num1, num2) {
 // Step 4: Use a while loop to repeatedly prompt the user to enter two numbers and calculate their product using the multiply function. Log the result to the console. Terminate the loop when the user enters a negative number as any of the inputs.
 let num1 = 0;
 let num2 = 0;
+let product = 0;
 
 while(num1 >= 0 && num2 >= 0) {
      num1 = parseInt(prompt("Enter multiplicand:"));

@@ -8,7 +8,8 @@ const Navbar = () => {
   
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = (e) => {
+    e.preventDefault();
     localStorage.removeItem('jwtToken');
     setIsAuthenticated(false);
   };
@@ -21,14 +22,33 @@ const Navbar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleMenu();
+    }
+  }
+
   return (
     <div className="navbar bg-blue-600 fixed top-0 left-0 right-0 z-10">
       <div className="flex-1">
-        <a className="btn btn-ghost text-white text-xl" onClick={handleHomeClick}>Dashboard</a>
+        <a
+          className="btn btn-ghost text-white text-xl"
+          onClick={handleHomeClick}
+          onKeyDown={handleKeyDown}
+          >
+            Dashboard
+        </a>
       </div>
       <div className="flex-none gap-2">
         <div className="dropdown dropdown-end">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar" onClick={toggleMenu}>
+        <div 
+            tabIndex={0} 
+            role="button" 
+            className="btn btn-ghost btn-circle avatar" 
+            onClick={toggleMenu}
+            onKeyDown={handleKeyDown}
+          >
             <div className="w-10 rounded-full">
               <img
                 alt="Profile"
@@ -48,7 +68,13 @@ const Navbar = () => {
               </li>
               <li><a>Settings</a></li>
               <li>
-                <a onClick={handleLogout}>Logout</a>
+                <a href="#"
+                  onClick={handleLogout}
+                  onKeyDown={handleKeyDown}
+                  tabIndex="0"
+                  >
+                  Logout
+                </a>
               </li>
             </ul>
           )}

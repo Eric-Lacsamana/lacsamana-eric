@@ -33,8 +33,8 @@ const CategoriesDropdown = ({ onChange, value }) => {
         disabled={categories.length === 0}
       >
         <option value="all">all</option>
-        {categories.map((category, index) => (
-          <option key={index} value={category}>
+        {categories.map((category) => (
+          <option key={`category-${category}`} value={category}>
             {category}
           </option>
         ))}

@@ -27,14 +27,14 @@
 
 
 // Primitive data types;
-let name = "John"; //string
+let firstName = "John"; //string
 let age = 25; // number
 let isStudent = true; // boolean
 let car = null; // null
 let city; // undefined
 
 // Outputting Data Types;
-console.log("Type of name:", typeof name);
+console.log("Type of name:", typeof firstName);
 console.log("Type of age:", typeof age);
 console.log("Type of isStudent:", typeof isStudent);
 console.log("Type of car:", typeof car);

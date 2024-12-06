@@ -103,10 +103,8 @@ function Circle4(radius) {
     y: 0,
   };
 
-  let computeOptimumLocation = function () {};
 
   this.draw = function () {
-    computeOptimumLocation(0.1);
     console.log("draw");
   };
 
