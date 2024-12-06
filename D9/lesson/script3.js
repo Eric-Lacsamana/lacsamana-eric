@@ -1,19 +1,18 @@
 // Function expression to fetch and display user data
 
 const displayUserData = async () => {
-    
     // Select the user container element
     const userContainer = document.getElementById("userContainer");
 
     try {
-
         // Fetch user data from the JSONPlaceholder API
         const response = await fetch("https://jsonplaceholder.typicode.com/users");
-        
+
         // Check if the response is not successful
         if (!response.ok) {
             throw new Error("Failed to fetch data.");
         }
+
         // Extract JSON data from the response
         const data = await response.json();
 
@@ -25,7 +24,7 @@ const displayUserData = async () => {
                 <div class="col">
                     <div class="card">
                         <div class="card-body">
-                            <h5 class="card-title>${user.name}</h5>
+                            <h5 class="card-title">${user.name}</h5> <!-- Fixed closing tag for h5 -->
                             <h6 class="card-subtitle mb-2 text-muted">${user.email}</h6>
                             <p class="card-text">Username: ${user.username}</p>
                             <p class="card-text">Phone: ${user.phone}</p>
@@ -44,6 +43,7 @@ const displayUserData = async () => {
         console.error(error);
     }
 }
+
 
 // Button click event listener to call the displayUserData function
 const fetchButton = document.getElementById("fetchButton");
